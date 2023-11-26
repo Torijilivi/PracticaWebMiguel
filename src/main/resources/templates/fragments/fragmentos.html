@@ -1,0 +1,194 @@
+<fieldset th:fragment="cabecera">
+  <legend th:text="#{formulario.legend}"/>
+  <div th:text="${mensajeError}" class="error"/>
+  <hr>
+  <th:block th:each="error: ${#fields.errors('global')}">
+    <div th:text="${error}" class="error"/>
+  </th:block>
+  <input type="hidden" name="iteraciones" value="1"/>
+</fieldset>
+
+<fieldset th:fragment="DatosUsuario">
+  <legend th:text="#{DatosUsuario.legend}"/>
+  <div>
+    <label th:for="nombre" th:text="#{nombre.label}"/>
+    <input type="text" th:field="*{nombre}" tabindex="0">
+    <th:block th:each="error: ${#fields.errors('nombre')}">
+      <div th:text="${error}" class="error"/>
+    </th:block>
+  </div>
+
+  <br/>
+  <br/>
+
+  <label th:for="clave" th:text="#{clave.label}"/>
+  <input type="password" th:field="*{clave}" tabindex="1">
+  <th:block th:each="error: ${#fields.errors('clave')}">
+    <div th:text="${error}" class="error"/>
+  </th:block>
+
+  <br/>
+  <br/>
+
+  <label th:for="confirmarClave" th:text="#{confirmarClave.label}"/>
+  <input type="password" th:field="*{confirmarClave}" tabindex="2">
+  <th:block th:each="error: ${#fields.errors('confirmarClave')}">
+    <div th:text="${error}" class="error"/>
+  </th:block>
+
+  <br/>
+
+  <input type="button" value="Mostrar claves" id="mostrarClaves">
+
+</fieldset>
+
+<br>
+
+<fieldset th:fragment="DatosPersonales">
+  <legend th:text="#{DatosPersonales.legend}"/>
+  <label th:for="edad" th:text="#{edad.label}"/>
+  <input type="text" th:field="*{edad}" placeholder="Edad" size="5" tabindex="3">
+  <th:block th:each="error: ${#fields.errors('edad')}">
+    <div th:text="error" class="error"/>
+  </th:block>
+
+  <br/>
+  <br/>
+
+  <label th:text="#{genero.label}"/>
+  <th:block th:each="genero: ${generos}">
+    <label th:text="${genero.value}"/>
+    <input type="radio" th:value="${genero.key}" th:id="${genero.value}" th:field="*{genero}">
+  </th:block>
+  <th:block th:each="error: ${#fields.errors('genero')}">
+    <div th:text="${error}" class="error"/>
+  </th:block>
+
+  </br>
+  </br>
+
+  <label th:for="fechaNacimiento" th:text="#{fechaNacimiento.label}"/>
+  <input type="text" th:field="*{fechaNacimiento}" placeholder="dd/mm/aaaa" size="10" tabindex="8">
+
+  </br>
+  </br>
+
+  <label th:for="siglasPais" th:text="#{paisNacimiento.label}"/>
+  <select th:field="*{siglasPais}" tabindex="12">
+    <option th:each="pais: ${paises}" th:value="${pais.key}" th:text="${pais.value.getPais()}"/>
+  </select>
+  <th:block th:each="error: ${#fields.errors('siglasPais')}">
+    <div th:text="${error}" class="error"/>
+  </th:block>
+</fieldset>
+
+</br>
+</br>
+
+<fieldset th:fragment="DatosContacto">
+  <legend th:text="#{DatosContacto.legend}"/>
+
+  <label th:for="prefijoTelefonico" th:text="#{prefijoTelefonico.label}"/>
+  <select tabindex="4" th:field="*{prefijoTelefonico}">
+    <option th:each="pais: ${paises}" th:value="${pais.key}" th:text="${pais.value.getPrefijoTelefonicoPais()}"/>
+  </select>
+  <th:block th:each="error: ${#fields.errors('prefijoTelefonico')}">
+    <div th:text="${error}" class="error"/>
+  </th:block>
+
+  </br>
+  </br>
+
+  <label th:for="telefono" th:text="#{telefono.label}"/>
+  <input type="text" th:field="*{telefono}" placeholder="Número de 9 dígitos"
+         size="15" tabindex="9">
+  <th:block th:each="error: ${#fields.errors('telefono')}">
+    <div th:text="${error}" class="error"/>
+  </th:block>
+
+  </br>
+  </br>
+
+  <label th:for="email" th:text="#{email.label}"/>
+  <input type="text" th:field="*{email}" placeholder="Introduzca un email de la forma usuario@servidor.extension"
+         size="45" tabindex="10">
+  <th:block th:each="error: ${#fields.errors('email')}">
+    <div th:text="error" class="error"/>
+  </th:block>
+
+  </br>
+  </br>
+
+  <label th:for="url" th:text="#{url.label}"/>
+  <input type="text" th:field="*{url}" placeholder="Página web" tabindex="11">
+  <th:block th:each="error: ${#fields.errors('url')}">
+    <div th:text="${error}" class="error"/>
+  </th:block>
+</fieldset>
+
+</br>
+</br>
+
+<fieldset th:fragment="OtraInformación">
+  <legend th:text="#{OtraInformacion.legend}"/>
+  <label th:for="archivosSeleccionados" th:text="#{archivos.label}"/>
+  <input type="file" th:field="*{archivos}" multiple="multiple" tabindex="13">
+
+  </br>
+  </br>
+
+  <label th:for="musicasSeleccionadas" th:text="#{musicas.label}"/>
+  <select name="musicasSeleccionadas" id="musicasSeleccionadas" multiple="multiple" tabindex="14">
+    <option th:each="musica: ${musicas}" th:value="${musica.key}" th:text="${musica.value}"/>
+  </select>
+
+  <br>
+
+  <input type="button" value="Deseleccionar SELECT múltiple" id="selectDes">
+  <input type="button" value="Seleccionar SELECT múltiple" id="selectEs">
+
+  </br>
+  </br>
+
+  <label th:text="#{aficiones.label}"/>
+  <th:block th:each="aficion: ${aficiones}">
+    <label th:text="${aficion.value}"/>
+    <input type="checkbox" th:value="${aficion.key}" th:id="${aficion.value}" th:field="*{aficionesSeleccionadas}" class="miCheckbox"/>
+  </th:block>
+
+  <br>
+
+  <input type="button" value="Deseleccionar checkboxes" id="desCheck">
+  <input type="button" value="Seleccionar checkboxes" id="esCheck">
+
+  </br>
+  </br>
+
+  <label th:for="comentarios" th:text="#{comentarios.label}"/>
+  <textarea th:field="*{comentarios}" cols="30" rows="10" tabindex="21"></textarea>
+</fieldset>
+
+</br></br>
+
+<fieldset th:fragment="OperacionesFormulario">
+  <legend th:text="#{OperacionesFormulario.legend}"/>
+  <label th:for="aceptarLicencia" th:text="#{aceptarLicencia.label}"/>
+  <input type="checkbox" th:field="*{aceptarLicencia}" tabindex="22" class="aceptarLicencia">
+
+  </br>
+  </br>
+
+  <input type="button" value="Dejar formulario en blanco" id="dejarBlanco">
+  <input type="reset" value="Restablecer">
+  <input type="submit"  value="Enviar al servidor">
+
+  <input type="image" th:src="@{/img/flechaDerecha.png}" alt="flechaDerecha">
+
+  </br>
+  </br>
+
+  <label th:for="idioma" th:text="#{idioma.label}"/>
+  <select name="idioma" id="idioma" tabindex="23">
+    <option th:each="pais: ${paises}" th:if="${pais.value.isMuestraIdioma() == true}" th:value="${pais.key}" th:text="${pais.value.getIdioma()}"/>
+  </select>
+</fieldset>

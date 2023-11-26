@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+<form action="recibe-parametros" method="post" id="formulario" th:object="${formulario}">
+    <div th:insert="~{/fragments/fragmentos.html :: cabecera}"/>
+    <div th:insert="~{/fragments/fragmentos.html :: DatosUsuario}"/>
+    <div th:insert="~{/fragments/fragmentos.html :: DatosPersonales}"/>
+    <div th:insert="~{/fragments/fragmentos.html :: DatosContacto}"/>
+    <div th:insert="~{/fragments/fragmentos.html :: OtraInformación}"/>
+    <div th:insert="~{/fragments/fragmentos.html :: OperacionesFormulario}"/>
+</form>
+</body>
+<script th:src="@{/js/script.js}"></script>
+</html>
